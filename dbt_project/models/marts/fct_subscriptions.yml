@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_subscriptions
+    columns:
+      - name: customer_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id

@@ -1,0 +1,1 @@
+{{ test_accepted_values(column_name="internet_service", model=get_where_subquery(ref('stg_telco_plans')), values=["DSL","Fiber optic","No"]) }}

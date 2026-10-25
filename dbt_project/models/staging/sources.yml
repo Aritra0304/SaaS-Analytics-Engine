@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    database: SAAS_DB
+    schema: RAW
+    tables:
+      - name: telco_data_raw
+        description: "Raw Telco customer churn data loaded from Kaggle CSV via ingest_kaggle.py"
+        columns:
+          - name: customerID
+            tests:
+              - unique
+              - not_null

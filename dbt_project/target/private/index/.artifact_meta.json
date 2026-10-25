@@ -1,0 +1,21 @@
+{
+  "target_dir": "C:\\Users\\AritraRoy\\Documents\\Data Engineer-Data Warehouse Course\\Snowflake\\saas_churn_project\\dbt_project\\target",
+  "fingerprints": {
+    "semantic_manifest.json": {
+      "size": 234,
+      "modified_secs": 1792949761
+    },
+    "run_results.json": {
+      "size": 346,
+      "modified_secs": 1792949761
+    },
+    "manifest.json": {
+      "size": 634064,
+      "modified_secs": 1792949761
+    }
+  },
+  "write_source": "DirectWrite",
+  "context_dir": null,
+  "context_fingerprints": {},
+  "source_identity": null
+}

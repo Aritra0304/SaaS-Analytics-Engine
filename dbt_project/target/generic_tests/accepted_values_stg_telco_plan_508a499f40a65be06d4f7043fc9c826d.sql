@@ -1,0 +1,1 @@
+{{ test_accepted_values(column_name="contract_type", model=get_where_subquery(ref('stg_telco_plans')), values=["Month-to-month","One year","Two year"]) }}

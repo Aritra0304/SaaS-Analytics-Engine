@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_telco_customers
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: gender
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Female', 'Male']
+
+  # Fixed: was stg_telco__plans (double underscore) — model name is stg_telco_plans
+  - name: stg_telco_plans
+    columns:
+      - name: contract_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Month-to-month', 'One year', 'Two year']
+      - name: internet_service
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['DSL', 'Fiber optic', 'No']

@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# OS files
+.DS_Store

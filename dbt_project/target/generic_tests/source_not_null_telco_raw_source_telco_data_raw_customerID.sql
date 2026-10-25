@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="customerID", model=get_where_subquery(source('telco_raw_source', 'telco_data_raw'))) }}
