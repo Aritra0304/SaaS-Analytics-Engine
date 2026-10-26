@@ -1,11 +1,13 @@
 SaaS Subscription & Churn Analytics Engine
 
 🚀 Project Overview
+
 This project implements a professional-grade Analytics Engineering pipeline designed to transform messy, flat-file subscription data into a highly structured, query-optimized Star Schema.
 
 The goal is to move away from "spreadsheet-style" data management and build a scalable Data Warehouse that allows business stakeholders to track critical SaaS metrics like Monthly Recurring Revenue (MRR) and Customer Churn Rate with high confidence and data integrity.
 
 🏗️ Architecture & Workflow
+
 The project follows an ELT (Extract, Load, Transform) pattern, utilizing an internal Snowflake stage to avoid the overhead of external cloud storage (AWS/GCP).
 
 ![Architecture Diagram](dbt_project/assets/snowflake_dbt_pipeline.png)
@@ -14,40 +16,56 @@ The project follows an ELT (Extract, Load, Transform) pattern, utilizing an inte
 
 
 🛠️ Tech Stack
+
 Data Warehouse: Snowflake (Cloud Data Platform)
 Transformation Tool: dbt Core (Analytics Engineering)
 Orchestration/Ingestion: Python (Pandas & Snowflake Connector)
 IDE: VSCode
 Data Modeling: Star Schema (Dimensions & Facts)
+
 📊 Data Modeling (Star Schema)
+
 To ensure high performance and ease of use for BI tools, the data is modeled into a Star Schema within the ANALYTICS schema:
 
 Dimensions
+
 dim_customers: Contains unique customer demographics (Gender, Seniority, Tenure).
 dim_plans: Contains subscription plan details (Contract type, Internet service, Security features).
+
 Facts
+
 fct_subscriptions: The central fact table linking customers to their plans, containing transaction-level metrics.
 fct_monthly_revenue: A specialized aggregate fact table for time-series analysis of revenue.
+
 📈 Business Intelligence: Key Metrics
+
 The pipeline is engineered to answer the following mission-critical questions:
 
 Monthly Recurring Revenue (MRR): What is our total predictable revenue per month?
 Churn Rate: What percentage of our customer base is canceling their subscriptions?
 ARPU (Average Revenue Per User): How much value are we extracting from each customer on average?
 Cohort Analysis: How does user retention vary based on their original signup month?
+
 🛡️ Data Quality & Integrity
+
 To ensure "Single Source of Truth" reliability, the project implements a multi-layered testing strategy using dbt tests:
 
 Uniqueness & Nullity: Ensures primary keys (e.g., customer_id) are never duplicated or missing.
 Referential Integrity: Uses relationship tests to ensure every record in the Fact table has a corresponding entry in the Dimension tables.
+
 Domain Validation: Uses accepted_values to ensure categorical data (e.g., contract_type) matches business definitions.
+
 Custom Business Logic: Implements singular SQL tests to catch logical errors, such as Total_Charges being less than Monthly_Charges.
+
 🚀 Getting Started
+
 Prerequisites
+
 Snowflake Account with ACCOUNTADMIN or appropriate warehouse permissions.
 Python 3.x installed.
 dbt-snowflake installed (pip install dbt-snowflake).
 Installation & Execution
+
 Clone the repository:
 bash
 
