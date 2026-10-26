@@ -8,38 +8,7 @@ The goal is to move away from "spreadsheet-style" data management and build a sc
 🏗️ Architecture & Workflow
 The project follows an ELT (Extract, Load, Transform) pattern, utilizing an internal Snowflake stage to avoid the overhead of external cloud storage (AWS/GCP).
 
-graph TD
-    subgraph "Local Environment (VSCode)"
-        A[fa:fa-file-csv Local CSV Files] -->|Python Script| B(fa:fa-code Snowflake Connector)
-    end
-
-    subgraph "Snowflake Cloud Data Warehouse"
-        B -->|PUT Command| C[fa:fa-cloud Internal Stage]
-        C -->|COPY INTO| D[(fa:fa-database RAW Schema: Flat Table)]
-        
-        subgraph "dbt Transformation Engine"
-            D --> E[fa:fa-filter Staging Layer: Cleaning/Casting]
-            E --> F[fa:fa-layer-group Intermediate Layer: Joining]
-            F --> G[fa:fa-star Marts Layer: Star Schema]
-        end
-        
-        subgraph "Final Structured Data"
-            G --> H[(fa:fa-user dim_customers)]
-            G --> I[(fa:fa-calendar-alt dim_plans)]
-            G --> J[(fa:fa-receipt fct_subscriptions)]
-            G --> K[(fa:fa-chart-line fct_monthly_revenue)]
-        end
-    end
-
-    subgraph "Business Value"
-        H & I & J & K --> L{fa:fa-chart-pie BI Dashboard / Analytics}
-    end
-
-    %% Styling
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style D fill:#ff9,stroke:#333,stroke-width:2px
-    style G fill:#9f9,stroke:#333,stroke-width:2px
-    style L fill:#9cf,stroke:#333,stroke-width:4px
+![Architecture Diagram](dbt_project/assets/snowflake_dbt_pipeline.png)
 
 
 
