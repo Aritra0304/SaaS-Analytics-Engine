@@ -61,9 +61,10 @@ Custom Business Logic: Implements singular SQL tests to catch logical errors, su
 
 Prerequisites
 
-Snowflake Account with ACCOUNTADMIN or appropriate warehouse permissions.
-Python 3.x installed.
-dbt-snowflake installed (pip install dbt-snowflake).
+1. Snowflake Account with ACCOUNTADMIN or appropriate warehouse permissions.
+2. Python 3.x installed.
+3. dbt-snowflake installed (pip install dbt-snowflake).
+
 Installation & Execution
 
 Clone the repository:
