@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_churn_risk
+    description: >
+      Fact table that scores each customer's churn risk as High / Medium / Low
+      using an additive scoring model across contract type, tenure, and add-on stickiness.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: contract_type
+        description: Type of contract (Month-to-month, One year, Two year).
+        tests:
+          - not_null
+      - name: tenure_months
+        description: Number of months the customer has been with the company.
+        tests:
+          - not_null
+      - name: addon_count
+        description: Number of active add-on services (0–7). Higher = more sticky.
+        tests:
+          - not_null
+      - name: total_risk_score
+        description: Sum of contract, tenure, and stickiness risk scores (0–6).
+        tests:
+          - not_null
+      - name: churn_risk_band
+        description: Risk classification — High (5–6), Medium (3–4), Low (0–2).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['High', 'Medium', 'Low']

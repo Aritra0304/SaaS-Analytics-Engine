@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_monthly_revenue
+    description: >
+      Fact table capturing revenue metrics per customer per month.
+      Contains monthly charges, total lifetime charges, and derived
+      revenue signals for active and churned customers.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: tenure_months
+        description: Number of months the customer has been with the company.
+        tests:
+          - not_null
+      - name: monthly_charges
+        description: The amount charged to the customer each month.
+        tests:
+          - not_null
+      - name: total_charges
+        description: >
+          Total charges accumulated over the customer's lifetime.
+          NULL for brand-new customers (raw source contains blank strings).
+      - name: monthly_revenue
+        description: >
+          Recurring monthly revenue signal (mirrors monthly_charges).
+          Used as the primary revenue metric per customer per billing period.
+        tests:
+          - not_null
+      - name: lifetime_revenue_at_churn
+        description: >
+          Total charges at the point of churn for customers who have churned.
+          NULL for customers who are still active.

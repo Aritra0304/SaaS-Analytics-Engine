@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_arpu
+    description: >
+      Aggregated ARPU (Average Revenue Per User) fact table segmented by
+      contract type, internet service tier, add-on tier, and churn status.
+      Provides a pricing health signal for BI dashboards.
+    columns:
+      - name: contract_type
+        description: Type of contract (Month-to-month, One year, Two year).
+        tests:
+          - not_null
+      - name: internet_service
+        description: Internet service type (DSL, Fiber optic, No).
+        tests:
+          - not_null
+      - name: addon_tier
+        description: Add-on bucket label (No add-ons, Light, Medium, Heavy).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['No add-ons', 'Light add-ons', 'Medium add-ons', 'Heavy add-ons']
+      - name: churn_status
+        description: Whether the customers in this group churned (Yes / No).
+        tests:
+          - not_null
+      - name: customer_count
+        description: Number of customers in this segment.
+        tests:
+          - not_null
+      - name: avg_monthly_arpu
+        description: Average monthly charge across customers in this segment.
+        tests:
+          - not_null
+      - name: avg_arpu_per_tenure_month
+        description: Average of (total_charges / tenure_months) for customers in this segment.

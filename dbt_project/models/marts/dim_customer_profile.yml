@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: dim_customer_profile
+    description: >
+      Extended customer dimension enriched with billing preferences, household
+      attributes, and a lifecycle stage label for BI segmentation.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: gender
+        description: Customer gender (Male / Female).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Male', 'Female']
+      - name: is_senior
+        description: TRUE if the customer is a senior citizen.
+        tests:
+          - not_null
+      - name: has_partner
+        description: TRUE if the customer has a partner.
+        tests:
+          - not_null
+      - name: has_dependents
+        description: TRUE if the customer has dependents.
+        tests:
+          - not_null
+      - name: tenure_months
+        description: Number of months the customer has been active.
+        tests:
+          - not_null
+      - name: payment_method
+        description: Customer's payment method.
+        tests:
+          - not_null
+      - name: has_paperless_billing
+        description: TRUE if the customer has opted into paperless billing.
+        tests:
+          - not_null
+      - name: is_digital_native
+        description: TRUE if the customer uses paperless billing AND an automatic payment method.
+        tests:
+          - not_null
+      - name: has_household
+        description: TRUE if the customer has a partner or dependents.
+        tests:
+          - not_null
+      - name: customer_lifecycle_stage
+        description: Tenure-based lifecycle label (New, Developing, Established, Loyal).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['New', 'Developing', 'Established', 'Loyal']

@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fct_revenue_cohorts
+    description: >
+      Aggregated revenue fact table grouped by tenure cohort, contract type,
+      internet service tier, and churn status. Used for cohort-level MRR analysis.
+    columns:
+      - name: tenure_cohort
+        description: Tenure bucket label (0–12 months, 13–24 months, 25–48 months, 48+ months).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['0–12 months', '13–24 months', '25–48 months', '48+ months']
+      - name: tenure_cohort_order
+        description: Numeric sort key for tenure cohort (1–4).
+        tests:
+          - not_null
+      - name: contract_type
+        description: Type of contract (Month-to-month, One year, Two year).
+        tests:
+          - not_null
+      - name: customer_count
+        description: Number of customers in this cohort/contract/churn group.
+        tests:
+          - not_null
+      - name: total_mrr
+        description: Sum of monthly charges for all customers in this group.
+        tests:
+          - not_null
+      - name: avg_monthly_charges
+        description: Average monthly charge per customer in this group.

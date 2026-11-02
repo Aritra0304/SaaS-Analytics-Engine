@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_plans
+    description: >
+      Dimension table containing plan and service attributes per customer.
+      Each row represents one customer's contracted plan configuration.
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer.
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+      - name: contract_type
+        description: Type of contract (Month-to-month, One year, Two year).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Month-to-month', 'One year', 'Two year']
+      - name: internet_service
+        description: Internet service provider type (DSL, Fiber optic, No).
+        tests:
+          - not_null
+      - name: online_security
+        description: Whether the customer has online security add-on (Yes, No, No internet service).
+      - name: streaming_tv
+        description: Whether the customer has streaming TV add-on (Yes, No, No internet service).
